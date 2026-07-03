@@ -760,6 +760,7 @@ html, body, #root {
 
 .product-grid {
   display: grid;
+  /* 4 columns desktop ke liye aur gaps ke liye */
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
@@ -767,14 +768,18 @@ html, body, #root {
 .card {
   background: #fff;
   padding: 15px;
-  with:150px;
+  
+  /* Badlaav Yahan Hai: Fixed width hatakar width: 100% karein taaki card cell ka full space le sake */
+  width: 100%; 
+  box-sizing: border-box; /* Padding ko width ke andar rakhne ke liye */
   
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Thoda acha look dene ke liye shadow */
 }
 
 .card img {
   width: 100%;
-  height: 150px;
+  height: 200px; /* Aap height thodi badha sakte hain agar image badi dikhani ho */
   object-fit: cover;
 }
 
@@ -791,12 +796,18 @@ html, body, #root {
   padding: 5px 10px;
 }
 
-/* Mobile */
+/* Mobile responsive screen ke liye */
 @media (max-width: 768px) {
+  .products-container {
+    padding: 15px; /* Mobile par padding kam karein taaki screen space bache */
+  }
+  
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Mobile par 2 columns dikhenge aur full width lenge */
+    gap: 15px;
   }
 }
+
 
 
 .logo img {
