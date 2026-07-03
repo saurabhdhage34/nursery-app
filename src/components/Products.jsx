@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaStar, FaShoppingCart } from "react-icons/fa";
+import { FaStar, FaShoppingCart, FaTrash } from "react-icons/fa"; // ❌ FaTrash आयकॉन रिमूव्हसाठी ॲड केला
 
 const data = [
   {
@@ -70,6 +70,20 @@ const data = [
 
 function Products() {
   const [filter, setFilter] = useState("all");
+  
+  // 🛒 १. कार्टची स्टेट (इथे ॲड झालेल्या प्रॉडक्ट्सचे IDs राहतील)
+  const [cart, setCart] = useState([]);
+
+  // ⚡ २. कार्टमध्ये Add / Remove करण्याचे फंक्शन
+  const toggleCartHandler = (id) => {
+    if (cart.includes(id)) {
+      // जर आधीच कार्टमध्ये असेल, तर काढा (Delete)
+      setCart(cart.filter((item) => item !== id));
+    } else {
+      // नसेल तर कार्टमध्ये टाका (Add)
+      setCart([...cart, id]);
+    }
+  };
 
   const filteredData =
     filter === "all"
@@ -79,6 +93,11 @@ function Products() {
   return (
     <div className="products-container">
       <h2>Our Products</h2>
+
+      {/* 🛍️ कार्ट काउंट डिस्प्ले (Optional) */}
+      <div style={{ margin: "10px 0", fontWeight: "bold" }}>
+        🛒 Total Cart Items: {cart.length}
+      </div>
 
       {/* ✅ FILTER BAR */}
       <div className="filter-bar">
@@ -106,34 +125,44 @@ function Products() {
 
       {/* ✅ PRODUCTS */}
       <div className="product-grid">
-        {filteredData.map((item) => (
-          <div className="card" key={item.id}>
-            <img src={item.img} alt={item.name} />
+        {filteredData.map((item) => {
+          // चेक करतो की हा विशिष्ट आयटम कार्टमध्ये आहे की नाही
+          const isInCart = cart.includes(item.id);
 
-            <h3>{item.name}</h3>
+          return (
+            <div className="card" key={item.id}>
+              <img src={item.img} alt={item.name} />
 
-            <div className="rating">
-              {[1, 2, 3, 4].map((i) => (
-                <FaStar key={i} />
-              ))}
-              <FaStar className="light" />
-            </div>
+              <h3>{item.name}</h3>
 
-            <div className="price-container">
-              <div>
-                <span className="current-price">${item.price}</span>
-                <span className="old-price">${item.oldPrice}</span>
+              <div className="rating">
+                {[1, 2, 3, 4].map((i) => (
+                  <FaStar key={i} />
+                ))}
+                <FaStar className="light" />
               </div>
 
-              <button className="cart-btn">
-                <FaShoppingCart />
-              </button>
+              <div className="price-container">
+                <div>
+                  <span className="current-price">${item.price}</span>
+                  <span className="old-price">${item.oldPrice}</span>
+                </div>
+
+                {/* 🛒 ३. डायनॅमिक बटण: कार्टमध्ये असेल तर लाल (Trash) आणि नसेल तर हिरवा (Cart) आयकॉन */}
+                <button 
+                  className={`cart-btn ${isInCart ? 'remove-btn' : 'add-btn'}`}
+                  onClick={() => toggleCartHandler(item.id)}
+                >
+                  {isInCart ? <FaTrash /> : <FaShoppingCart />}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default Products;
+          
