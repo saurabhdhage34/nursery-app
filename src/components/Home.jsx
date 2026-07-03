@@ -23,7 +23,7 @@ function Home() {
           {/* Left */}
           <div className="col-md-6">
             <p className="opacity-75">Nature, Delivered.</p>
-            <h1 className="display-4 fw-bold">Bring Nature Closer</h1>
+            <h1 className="display-4 fw-bold">Bring Nature Closer SD</h1>
             <p>
               Turn your home into a living sanctuary with our curated plant collection.
             </p>
