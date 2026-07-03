@@ -767,6 +767,8 @@ html, body, #root {
 .card {
   background: #fff;
   padding: 15px;
+  with:150px;
+  
   border-radius: 10px;
 }
 
