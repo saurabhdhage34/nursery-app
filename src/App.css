@@ -843,3 +843,25 @@ html, body, #root {
     margin-left: auto; /* button right ला */
   }
 }
+/* कॉमन बटण स्टाईल */
+.cart-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+/* जेव्हा प्रॉडक्ट कार्टमध्ये नसेल (Add) */
+.add-btn {
+  background: #28a745; /* हिरवा रंग */
+}
+
+/* जेव्हा प्रॉडक्ट कार्टमध्ये असेल (Remove) */
+.remove-btn {
+  background: #dc3545; /* लाल रंग */
+}
